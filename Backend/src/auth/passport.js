@@ -13,9 +13,6 @@ passport.use(new Strategy({
     accessType: "offline",
     prompt: 'consent',
 }, async (req, accessToken, refreshToken, profile, done) => {
-    // Here you can save the user profile to your database
-    console.log("Access Token: ", accessToken);
-    console.log("Refresh Token: ", refreshToken);
 
 
     const user = await userModel.findOne({ email: profile.emails[ 0 ].value });

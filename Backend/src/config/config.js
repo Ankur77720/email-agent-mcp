@@ -9,6 +9,7 @@ const _config = {
     GOOGLE_REDIRECT_URI: process.env.GOOGLE_REDIRECT_URI || "",
     GOOGLE_SECRET_KEY: process.env.GOOGLE_SECRET_KEY || "",
     MONGODB_URI: process.env.MONGODB_URI || "mongodb://localhost:27017/yourdb",
+    JWT_SECRET: process.env.JWT_SECRET
 }
 
 
