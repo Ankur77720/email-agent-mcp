@@ -1,0 +1,56 @@
+.chat-main {
+  height: 100%;
+  width: 100%;
+}
+
+.chat-section {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chat-section .conversation-area {
+  width: 75%;
+  height: 100%;
+  position: relative;
+}
+.chat-section .conversation-area .messages {
+  height: 100%;
+  width: 100%;
+  padding-bottom: 5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.chat-section .conversation-area .messages .message {
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  background-color: #0e0e0e;
+  border-radius: 0.5rem;
+  text-align: left;
+  max-width: 80%;
+}
+.chat-section .conversation-area .messages .message.user {
+  margin-left: auto;
+}
+.chat-section .conversation-area .input-area {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  border-radius: 0.75rem;
+}
+.chat-section .conversation-area .input-area input {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+}

@@ -4,7 +4,7 @@ import connectDB from "./src/db/db.js";
 import { Server } from "socket.io";
 import userModel from "./src/models/user.model.js";
 import http from "http";
-
+import getResponse from "./src/service/ai.service.js";
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -39,7 +39,19 @@ io.use(async (socket, next) => {
 io.on("connection", (socket) => {
     console.log("New client connected");
 
-    console.log(socket.user);
+
+    socket.on("message", async (data) => {
+        const { message } = data;
+
+
+        const response = await getResponse(message);
+
+        console.log("Response from AI:", response);
+
+        socket.emit("message", response);
+
+    })
+
 
     socket.on("disconnect", () => {
         console.log("Client disconnected");
