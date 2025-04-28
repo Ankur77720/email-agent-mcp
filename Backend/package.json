@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@google/genai": "^0.10.0",
+    "@modelcontextprotocol/sdk": "^1.10.2",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -24,6 +25,7 @@
     "mongoose": "^8.14.0",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "zod": "^3.24.3"
   }
 }
