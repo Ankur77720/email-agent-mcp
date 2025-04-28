@@ -34,7 +34,7 @@ const initializeSocket = (server) => {
         next();
     });
 
-    io.on("connection", async (socket)  => {
+    io.on("connection", async (socket) => {
 
         const messages = await getMessages(`conversation:${socket.user._id}`);
         socket.emit('chat-history', messages);
@@ -52,7 +52,7 @@ const initializeSocket = (server) => {
 
 
 
-            const response = await getResponse(messages);
+            const response = await getResponse(messages, socket.user);
 
             appendMessage(`conversation:${socket.user._id}`, {
                 role: "model",

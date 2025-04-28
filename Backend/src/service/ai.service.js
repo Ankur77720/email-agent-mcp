@@ -6,13 +6,33 @@ const ai = new GoogleGenAI({ apiKey: config.GOOGLE_GEMINI_API_KEY });
 
 const tools = (await mcpClient.listTools()).tools
 
+function getSystemInstruction(user) {
+    return `
+    <persona>
 
-async function getResponse(messages) {
+    your an helpful assistant that can help the user with their tasks.
+    you have access to a set of tools that can help you with your tasks.
+    
+    </persona>
+
+    <important>
+    you are not allowed to use any other tools or APIs other than the ones provided to you.
+
+    currently you are acting on behalf of ${user.name} with the email ${user.email} and userId ${user._id}.
+    
+    </important>
+    
+    `
+}
+
+
+async function getResponse(messages, user) {
 
     const response = await ai.models.generateContent({
         model: "gemini-2.5-flash-preview-04-17",
         contents: messages,
         config: {
+            systemInstruction: getSystemInstruction(user),
             tools: [ {
                 functionDeclarations: tools.map(tool => {
                     return {
@@ -27,11 +47,12 @@ async function getResponse(messages) {
                 })
             } ]
         }
+
     })
 
 
 
-    const functionCall = response.functionCalls[ 0 ]
+    const functionCall = response.functionCalls && response.functionCalls[ 0 ]
 
     if (functionCall) {
 
@@ -39,8 +60,6 @@ async function getResponse(messages) {
             name: functionCall.name,
             arguments: functionCall.args
         })
-
-        console.log("Tool result", toolResult)
 
         const result = toolResult.content[ 0 ].text
 
